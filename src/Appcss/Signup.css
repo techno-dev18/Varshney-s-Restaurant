@@ -1,0 +1,174 @@
+.signup-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg,#fff8f2,#ffe8d9);
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-color);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+}
+
+.signup-container h1 {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.signup-text {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(255,99,71,.2);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.signup-btn {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.signup-btn:hover {
+    background: var(--primary-hover);
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+.divider span {
+    position: relative;
+    background: white;
+    padding: 0 15px;
+    color: #777;
+}
+
+.google-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.google-btn:hover {
+    background: #f5f5f5;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+}
+
+.login-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+.signup-container{
+padding:30px 25px;
+}
+
+}
+
+@media(max-width:480px){
+
+.signup-container{
+padding:22px;
+}
+
+.signup-container h1{
+font-size:1.6rem;
+}
+
+.signup-text{
+font-size:.9rem;
+}
+
+.form-group input,
+.form-group select,
+.signup-btn,
+.google-btn{
+padding:12px;
+}
+
+}

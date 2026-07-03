@@ -1,0 +1,29 @@
+:root {
+
+    /* Main Brand Colors */
+    --primary-color: #5d08ee;
+    --primary-hover: #4c1ad6;
+
+    --secondary-color: #240a05;
+
+    /* Background Colors */
+    --background-color: #f9f9f9;
+    --card-color: #ffffff;
+    --footer-color: #1A1A1A;
+
+    /* Text Colors */
+    --text-color: #333333;
+    --white: #ffffff;
+
+    /* Accent */
+    --gold-color: #D4AF37;
+
+    /* Border */
+    --border-radius: 20px;
+   --footer-color: #1A1A1A;
+    /* Shadow */
+    --shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+    /* Transition */
+    --transition: 0.3s ease;
+}

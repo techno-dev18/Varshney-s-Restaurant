@@ -1,0 +1,127 @@
+header {
+    background-color: var(--secondary-color);
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header a {
+    text-decoration:none;
+    color: var(--white);
+    font-weight: bold;
+    transition: var(--transition);
+    padding: 5px;
+}
+
+header a:hover {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 5px;
+    flex-wrap: wrap;
+}
+
+.search-box input {
+    width: 350px;
+    max-width: 90%;
+    padding: 12px 10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 8px rgba(93, 8, 238, 0.3);
+}
+
+.search-btn {
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--secondary-color);
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+/* Profile */
+
+.profile-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-icon {
+    font-size: 34px;
+    color: white;
+    transition: .3s;
+}
+
+.profile-icon:hover {
+    color: var(--primary-color);
+}
+
+/* Dropdown */
+
+.profile-dropdown {
+    position:relative;
+    top: 45px;
+    right: 0;
+    width: 160px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.15);
+
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    transition: .3s;
+    z-index: 1000;
+}
+
+.profile-menu:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown a {
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #333;
+    transition: .3s;
+}
+
+.profile-dropdown a:hover {
+    background: var(--primary-color);
+    color: white;
+}

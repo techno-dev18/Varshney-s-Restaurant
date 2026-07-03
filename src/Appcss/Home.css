@@ -1,0 +1,185 @@
+.home-container {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Tagline */
+
+.tagline {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.tagline h2 {
+    color: var(--primary-color);
+    margin: 12px 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+/* Search */
+
+.search-box {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 250px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(255, 99, 71, .2);
+}
+
+.search-box .btn {
+    padding: 15px 28px;
+}
+
+/* Buttons */
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-3px);
+}
+
+/* About */
+
+.about-section {
+    max-width: 1100px;
+    margin: auto;
+    background: var(--card-color);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+}
+
+.para {
+    color: #555;
+    line-height: 1.9;
+    text-align: justify;
+    font-size: 17px;
+}
+
+/* Feature Sections */
+
+.feature-section {
+    max-width: 1200px;
+    margin: 70px auto;
+    text-align: center;
+}
+
+.feature-section h3 {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.feature-section>p {
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: var(--card-color);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, .15);
+}
+
+.feature-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Responsive */
+
+@media (max-width:768px) {
+
+    .tagline h2 {
+        font-size: 1.25rem;
+    }
+
+    .search-box {
+        padding: 0 15px;
+    }
+
+    .about-section {
+        padding: 30px 20px;
+    }
+
+}
+
+@media (max-width:480px) {
+
+    .tagline h2 {
+        font-size: 1rem;
+    }
+
+    .search-box input,
+    .btn {
+        width: 100%;
+    }
+
+    .action-buttons {
+        padding: 0 15px;
+    }
+
+    .about-section {
+        margin: 0 10px;
+        padding: 20px;
+    }
+
+    .para {
+        font-size: 15px;
+    }
+
+}

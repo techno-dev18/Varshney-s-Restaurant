@@ -1,0 +1,24 @@
+.hero-section {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+.menu-item {
+    background: var(--card-color);
+    box-shadow: var(--shadow);
+}
+
+.menu-item h3 {
+    color: var(--primary-color);
+}
+
+.filters select,
+.filters input {
+    border-radius: var(--border-radius);
+}
+
+#cartBtn,
+#clearFilters {
+    background: var(--primary-color);
+    color: var(--white);
+}
