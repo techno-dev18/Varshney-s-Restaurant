@@ -108,6 +108,7 @@ function Signup() {
           <button
             type="button"
             className="google-btn"
+            href="https://accounts.google.com/"
           >
             <FcGoogle size={22} />
             Sign up with Google
