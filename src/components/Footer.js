@@ -2,11 +2,24 @@ import React from 'react'
 import "../Appcss/Footer.css";
 import { Link } from "react-router-dom";
 export default function Footer() {
+ const scrollToSection = (id) => {
+    const section = document.getElementById(id);
 
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <footer className="footer">
       <div className="footer-container">
-
+ <button
+          className="btn"
+          onClick={() => scrollToSection("home")}
+        >
+          Back to Top
+        </button>
         <div className="footer-brand">
           <h2>Varshney's Group Restaurant</h2>
           <p>
