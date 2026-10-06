@@ -1,96 +1,168 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Appcss/FoodMenu.css";
-import FMdata from "../data/FMdata";
 import { useCart } from "../components/CartContext";
+
 function FoodMenu() {
-  const { addToCart, cartItems } = useCart();
+  const { addToCart } = useCart();
+
+  const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const [category, setCategory] = useState("All");
   const [foodType, setFoodType] = useState("All");
   const [rating, setRating] = useState("All");
   const [sortPrice, setSortPrice] = useState("");
   const [search, setSearch] = useState("");
-  const filteredFood = FMdata.filter((food) => {
-    const categoryMatch =
-      category === "All" || food.category === category;
 
-    const typeMatch =
-      foodType === "All" || food.type === foodType;
+  // Get food from backend
+  useEffect(() => {
+    const fetchFoods = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/foods");
 
-    const ratingMatch =
-      rating === "All" || food.rating >= Number(rating);
+        if (!response.ok) {
+          throw new Error("Failed to fetch food data");
+        }
 
-    const searchMatch =
-      food.name.toLowerCase().includes(search.toLowerCase());
+        const data = await response.json();
 
+        setFoods(data);
+      } catch (error) {
+        console.error(error);
+        setError("Unable to load food menu.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoods();
+  }, []);
+
+  // Filter food
+  const filteredFood = foods
+    .filter((food) => {
+      const categoryMatch =
+        category === "All" || food.category === category;
+
+      const typeMatch =
+        foodType === "All" || food.type === foodType;
+
+      const ratingMatch =
+        rating === "All" || food.rating >= Number(rating);
+
+      const searchMatch =
+        food.name.toLowerCase().includes(search.toLowerCase());
+
+      return (
+        categoryMatch &&
+        typeMatch &&
+        ratingMatch &&
+        searchMatch
+      );
+    })
+    .sort((a, b) => {
+      if (sortPrice === "Low") {
+        return a.price - b.price;
+      }
+
+      if (sortPrice === "High") {
+        return b.price - a.price;
+      }
+
+      return 0;
+    });
+
+  // Loading
+  if (loading) {
     return (
-      categoryMatch &&
-      typeMatch &&
-      ratingMatch &&
-      searchMatch
+      <div className="menu-section">
+        <h2>Loading Food Menu...</h2>
+      </div>
     );
-  }).sort((a, b) => {
-    if (sortPrice === "low") return a.price - b.price;
-    if (sortPrice === "high") return b.price - a.price;
-    return 0;
-  });
+  }
+
+  // Error
+  if (error) {
+    return (
+      <div className="menu-section">
+        <h2>{error}</h2>
+        <p>
+          Make sure the backend is running on port 5000.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div className="food-menu">
+
+      <section className="hero-section">
+        <h1>Our Food Menu</h1>
+        <p>Delicious food prepared with love</p>
+      </section>
+
+      {/* Filters */}
       <div className="filters">
 
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search food..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        {/* Category */}
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="All">All Categories</option>
-          <option value="Starters">Starters</option>
-          <option value="Indian Main Course">Indian Main Course</option>
-          <option value="Biryani & Rice">Biryani & Rice</option>
-          <option value="Chinese Cuisine">Chinese Cuisine</option>
-          <option value="Italian Cuisine">Italian Cuisine</option>
-          <option value="Desserts">Desserts</option>
-          <option value="Beverages">Beverages</option>
+          <option value="Indian">Indian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Italian">Italian</option>
+          <option value="Fast Food">Fast Food</option>
+          <option value="Healthy">Healthy</option>
+          <option value="Drinks">Drinks</option>
         </select>
 
+        {/* Food Type */}
         <select
           value={foodType}
           onChange={(e) => setFoodType(e.target.value)}
         >
-          <option value="All">All</option>
-          <option value="Veg">Veg</option>
-          <option value="Non-Veg">Non-Veg</option>
+          <option value="All">All Types</option>
+          <option value="dish">Dish</option>
+          <option value="cuisine">Cuisine</option>
+          <option value="dessert">Dessert</option>
+          <option value="beverage">Beverage</option>
         </select>
 
+        {/* Rating */}
         <select
           value={rating}
           onChange={(e) => setRating(e.target.value)}
         >
           <option value="All">All Ratings</option>
-          <option value="4">4⭐ & Above</option>
-          <option value="3">3⭐ & Above</option>
+          <option value="4">4★ & above</option>
+          <option value="4.5">4.5★ & above</option>
+          <option value="4.8">4.8★ & above</option>
         </select>
 
+        {/* Price */}
         <select
           value={sortPrice}
           onChange={(e) => setSortPrice(e.target.value)}
         >
           <option value="">Sort by Price</option>
-          <option value="low">Low to High</option>
-          <option value="high">High to Low</option>
+          <option value="Low">Low to High</option>
+          <option value="High">High to Low</option>
         </select>
 
-        <input
-          type="text"
-          placeholder="Search Food..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-        <button>
-          Cart ({cartItems.length})
-        </button>
-
+        {/* Clear Filters */}
         <button
+          id="clearFilters"
           onClick={() => {
             setCategory("All");
             setFoodType("All");
@@ -99,55 +171,74 @@ function FoodMenu() {
             setSearch("");
           }}
         >
-          Clear
+          Clear Filters
         </button>
 
       </div>
+
+      {/* Food Cards */}
       <section className="menu-section">
 
         <div className="menu-grid">
 
-          {filteredFood.map((food) => (
+          {filteredFood.length === 0 ? (
+            <p>No food items found.</p>
+          ) : (
+            filteredFood.map((food) => (
 
-            <div
-              className="menu-item"
-              key={food.id}
-            >
+              <div className="menu-item" key={food._id}>
 
-              <img src={food.image} alt={food.name} />
+                <img
+                  src={food.image || food.imgUrl}
+                  alt={food.name}
+                />
 
-              <h3>{food.name}</h3>
+                <h3>{food.name}</h3>
 
-              <p>{food.description}</p>
+                <p>
+                  {food.description}
+                </p>
 
-              <p>{food.category}</p>
+                <p>
+                  ⭐ {food.rating}
+                </p>
 
-              <p>{food.type}</p>
+                <p>
+                  <strong>₹{food.discountedPrice || food.price}</strong>
+                </p>
 
-              <p className="rating">⭐ {food.rating}</p>
+                {food.discountPercentage > 0 && (
+                  <p>
+                    <del>₹{food.price}</del>{" "}
+                    {food.discountPercentage}% OFF
+                  </p>
+                )}
 
-              <p>
-                <span className="old-price">₹{food.price}</span>{" "}
-                <span className="new-price">₹{food.discountedPrice}</span>
-              </p>
+                <p>
+                  {food.category}
+                </p>
 
-              <div className="discount-badge">
-                {food.discountPercentage}% OFF
+                <p>
+                  {food.type}
+                </p>
+
+                <button
+                  onClick={() => addToCart(food)}
+                >
+                  Add to Cart
+                </button>
+
               </div>
 
-              <button onClick={() => addToCart(food)}>
-                Add to Cart
-              </button>
-            </div>
-
-          ))}
+            ))
+          )}
 
         </div>
 
       </section>
-    </>
-  );
 
+    </div>
+  );
 }
 
 export default FoodMenu;
