@@ -1,29 +1,70 @@
 :root {
+  /* Brand */
+  --primary-color: #6b1d1d;
+  --primary-hover: #521414;
+  --secondary-color: #1f0d08;
+  --gold-color: #c9a24a;
 
-    /* Main Brand Colors */
-    --primary-color: #5d08ee;
-    --primary-hover: #4c1ad6;
+  /* Surfaces */
+  --background-color: #faf6ef;
+  --card-color: #ffffff;
+  --footer-color: #1a1a1a;
 
-    --secondary-color: #240a05;
+  /* Text */
+  --text-color: #2b2420;
+  --text-muted: #6f655d;
+  --white: #ffffff;
 
-    /* Background Colors */
-    --background-color: #f9f9f9;
-    --card-color: #ffffff;
-    --footer-color: #1A1A1A;
+  /* Shape, shadow, motion */
+  --border-radius: 20px;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  --transition: 0.3s ease;
 
-    /* Text Colors */
-    --text-color: #333333;
-    --white: #ffffff;
+  /* Typography */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
-    /* Accent */
-    --gold-color: #D4AF37;
+html {
+  scroll-behavior: smooth;
+}
 
-    /* Border */
-    --border-radius: 20px;
-   --footer-color: #1A1A1A;
-    /* Shadow */
-    --shadow: 0 4px 10px rgba(0,0,0,0.15);
+body {
+  margin: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* Transition */
-    --transition: 0.3s ease;
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Scroll-reveal utility (used by components/Reveal.jsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }

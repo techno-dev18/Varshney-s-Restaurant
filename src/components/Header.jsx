@@ -1,97 +1,127 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FaBars, FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import logo from "../imgRes/123.png";
-import "../Appcss/Header.css";
-import { FaUserCircle } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "./CartContext";
-import { useState } from "react";
-import FMdata from "../data/FMdata";
+import "../Appcss/Header.css";
+
+const NAV_LINKS = [
+  { to: "/", label: "Home", end: true },
+  { to: "/foodmenu", label: "Food Menu" },
+  { to: "/rooms", label: "Rooms & Halls" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+];
 
 function Header() {
-  const [search, setSearch] = useState("");
-
-  const suggestions = FMdata.filter((food) =>
-    food.name.toLowerCase().includes(search.toLowerCase())
-  );
   const { cartItems } = useCart();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const accountRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onMouseDown = (e) => {
+      if (accountRef.current && !accountRef.current.contains(e.target)) {
+        setAccountOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setAccountOpen(false);
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  const closeMenus = () => {
+    setMenuOpen(false);
+    setAccountOpen(false);
+  };
+
+  const cartCount = cartItems.length;
+
   return (
+    <header className={`vh-header${scrolled ? " is-scrolled" : ""}`}>
+      <div className="vh-inner">
+        <Link to="/" className="vh-brand" onClick={closeMenus} aria-label="Varshney's Restaurant, home">
+          <img src={logo} alt="" className="vh-logo" />
+          <span className="vh-wordmark">
+            <span className="vh-name">Varshney's</span>
+            <span className="vh-sub">Restaurant</span>
+          </span>
+        </Link>
 
-    <header className="header">
-      <div className="logo">
-        <div className="search-box">
-
-          <input
-            type="text"
-            placeholder="Search for cuisines or dishes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-
-          <button className="search-btn">
-            Search
-          </button>
-
-          {search && (
-
-            <div className="search-suggestions">
-
-              {suggestions.slice(0, 5).map((food) => (
-
-                <div
-                  key={food.id}
-                  className="suggestion-item"
-                >
-                  {food.name}
-                </div>
-
-              ))}
-
-            </div>
-
-          )}
-
-        </div>
-       
-
-      </div>
-      <div className="profile-menu">
-        <FaUserCircle className="profile-icon" />
-
-        <div className="profile-dropdown">
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      </div>
-      <div>
-        <nav className="navbar">
-          <img
-            src={logo}
-            alt="Varshney Group's Logo"
-            height="90 px"
-            border-radius="90%"
-          />
-          <Link to="/">HOME</Link>
-          <Link to="/about">ABOUT US</Link>
-          <Link to="/contact">CONTACT US</Link>
-          <Link to="/foodmenu">FOOD MENU</Link>
-          {/* <Link to="/menu">MENU</Link> */}
-          <Link to="/rooms">ROOMS & HALLS</Link>
-          <Link to="/dropdowncard">DROPDOWN CARD</Link>
-          <Link to="/cart" className="cart-icon">
-            <FaShoppingCart />
-            <span>{cartItems.length}</span>
-          </Link>
-
+        <nav id="primary-nav" className={`vh-nav${menuOpen ? " is-open" : ""}`} aria-label="Primary">
+          {NAV_LINKS.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              onClick={closeMenus}
+              className={({ isActive }) => `vh-link${isActive ? " is-active" : ""}`}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
 
+        <div className="vh-actions">
+          <Link
+            to="/cart"
+            className="vh-icon-btn"
+            onClick={closeMenus}
+            aria-label={`Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
+          >
+            <FaShoppingCart />
+            {cartCount > 0 && <span className="vh-badge">{cartCount}</span>}
+          </Link>
 
+          <div className="vh-account" ref={accountRef}>
+            <button
+              type="button"
+              className="vh-icon-btn"
+              aria-label="Account menu"
+              aria-expanded={accountOpen}
+              onClick={() => setAccountOpen((open) => !open)}
+            >
+              <FaUserCircle />
+            </button>
+            {accountOpen && (
+              <div className="vh-dropdown">
+                <Link to="/login" onClick={closeMenus}>Login</Link>
+                <Link to="/signup" onClick={closeMenus}>Sign Up</Link>
+              </div>
+            )}
+          </div>
 
+          <button
+            type="button"
+            className="vh-icon-btn vh-toggle"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-controls="primary-nav"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
-
-    </header >
+    </header>
   );
 }
 
 export default Header;
-
