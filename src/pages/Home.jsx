@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Reveal from "../components/Reveal";
-import "../Appcss/Landing.css";
+import "../Css/Landing.css";
 
 const SERVICES = [
   {
     title: "Dining",
     text: "Multi-cuisine meals served with warm, attentive hospitality.",
-    to: "/foodmenu",
+    to: "/food-menu",
     cta: "View the menu",
   },
   {
@@ -45,7 +45,7 @@ function Home() {
             one roof.
           </p>
           <div className="vhome-actions">
-            <Link to="/foodmenu" className="vhome-btn vhome-btn--primary">
+            <Link to="/food-menu" className="vhome-btn vhome-btn--primary">
               Explore the menu
             </Link>
             <Link to="/rooms" className="vhome-btn vhome-btn--ghost">

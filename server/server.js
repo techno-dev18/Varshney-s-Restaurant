@@ -9,6 +9,10 @@ require("dotenv").config({
 const connectDB = require("./config/db");
 const foodRoutes = require("./routes/foodRoutes");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const roomRoutes = require("./routes/roomRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
 
 // DNS
@@ -21,6 +25,12 @@ app.use(express.json());
 // Routes
 app.use("/api/foods", foodRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/foods", foodRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/rooms", roomRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/bookings", bookingRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.send("Varshney Restaurant API Running");

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Appcss/Login.css";
+import "../Css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
@@ -37,23 +37,29 @@ function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+        throw new Error(
+          data.message || "Login failed"
+        );
       }
 
-      // Save token
-      localStorage.setItem("token", data.token);
+      // Save JWT token
+      localStorage.setItem(
+        "token",
+        data.token
+      );
 
-      // Save user
+      // Save logged-in user
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
-      // Go to home
+      // Go to home page
       navigate("/");
 
     } catch (error) {
       setError(error.message);
+
     } finally {
       setLoading(false);
     }
@@ -61,13 +67,18 @@ function Login() {
 
   return (
     <section className="login-section">
+
       <div className="login-container">
 
-        <h1>Welcome Back!</h1>
+        <h1>
+          Welcome Back!
+        </h1>
 
         <p className="login-subtitle">
-          Sign in to continue your delicious journey with SV's Restaurant.
+          Sign in to continue your delicious
+          journey with SV's Restaurant.
         </p>
+
 
         <form
           className="login-form"
@@ -76,35 +87,57 @@ function Login() {
 
           {/* Email */}
           <div className="input-group">
+
+            <label htmlFor="login-email">
+              Email
+            </label>
+
             <input
+              id="login-email"
               type="email"
-              placeholder="Email"
+              placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
               required
             />
+
           </div>
 
 
           {/* Password */}
           <div className="input-group">
+
+            <label htmlFor="login-password">
+              Password
+            </label>
+
             <input
+              id="login-password"
               type="password"
-              placeholder="Password"
+              placeholder="Enter your password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
               required
             />
+
           </div>
 
 
+          {/* Forgot Password */}
           <div className="login-options">
+
             <Link to="/forgot-password">
               Forgot Password?
             </Link>
+
           </div>
 
 
+          {/* Error */}
           {error && (
             <p className="error-message">
               {error}
@@ -112,22 +145,32 @@ function Login() {
           )}
 
 
+          {/* Login Button */}
           <button
             type="submit"
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Log In"}
+            {loading
+              ? "Logging in..."
+              : "Log In"}
           </button>
 
         </form>
 
 
+        {/* Signup */}
         <p className="signup-link">
+
           Don't have an account?
-          <Link to="/signup"> Sign Up</Link>
+
+          <Link to="/signup">
+            {" "}Sign Up
+          </Link>
+
         </p>
 
       </div>
+
     </section>
   );
 }

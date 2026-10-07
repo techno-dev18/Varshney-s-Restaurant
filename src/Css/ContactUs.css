@@ -1,0 +1,580 @@
+/* =========================================================
+   VARSHNEY'S GROUP - CONTACT PAGE
+   ========================================================= */
+
+.vcontact {
+    width: 100%;
+    background: #f7f5f0;
+    color: #1b1b1b;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.vcontact-hero {
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 24px;
+    position: relative;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(18, 18, 18, 0.76),
+            rgba(18, 18, 18, 0.76)
+        ),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85")
+        center / cover no-repeat;
+}
+
+.vcontact-hero-content {
+    max-width: 750px;
+    color: #ffffff;
+}
+
+.vcontact-eyebrow {
+    margin: 0 0 20px;
+    color: #d6b36a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.vcontact-hero h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(46px, 6vw, 72px);
+    font-weight: 500;
+}
+
+.vcontact-rule {
+    display: block;
+    width: 65px;
+    height: 2px;
+    margin: 25px auto;
+    background: #d6b36a;
+}
+
+.vcontact-hero p:last-child {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.vcontact-section {
+    padding: 110px 24px;
+}
+
+.vcontact-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.vcontact-kicker {
+    margin: 0 0 14px;
+    color: #8b6a2e;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.vcontact-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 65px;
+}
+
+.vcontact-intro h2,
+.vcontact-form-card h2,
+.vcontact-faq h2,
+.vcontact-map-heading h2,
+.vcontact-branches-heading h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.vcontact-intro > p {
+    margin: 0;
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   CONTACT GRID
+   ========================================================= */
+
+.vcontact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.vcontact-left {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.vcontact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* =========================================================
+   CONTACT CARDS
+   ========================================================= */
+
+.vcontact-card {
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e4dfd5;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.vcontact-card:hover {
+    transform: translateY(-4px);
+    border-color: #d6b36a;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.07);
+}
+
+.vcontact-card-label {
+    display: block;
+    margin-bottom: 14px;
+    color: #8b6a2e;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.vcontact-card h3 {
+    margin: 0 0 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #1b1b1b;
+}
+
+.vcontact-card p {
+    margin: 4px 0;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   WHATSAPP
+   ========================================================= */
+
+.vcontact-whatsapp-card {
+    grid-column: 1 / -1;
+}
+
+.vcontact-whatsapp-card p {
+    margin-bottom: 22px;
+}
+
+.vcontact-whatsapp {
+    width: 100%;
+    padding: 13px 20px;
+    border: 1px solid #d6b36a;
+    background: #1b1b1b;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.vcontact-whatsapp:hover {
+    background: #d6b36a;
+    color: #171717;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.vcontact-form-card {
+    padding: 42px;
+    background: #ffffff;
+    border: 1px solid #e4dfd5;
+}
+
+.vcontact-form-intro {
+    max-width: 600px;
+    margin: 18px 0 32px;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.vcontact-form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.vcontact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.vcontact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vcontact-field label {
+    color: #333333;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.vcontact-field input,
+.vcontact-field select,
+.vcontact-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid #dcd7ce;
+    outline: none;
+    background: #faf9f6;
+    color: #222222;
+    font-family: inherit;
+    font-size: 14px;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.vcontact-field textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.vcontact-field input:focus,
+.vcontact-field select:focus,
+.vcontact-field textarea:focus {
+    border-color: #b8944f;
+    box-shadow: 0 0 0 3px rgba(214, 179, 106, 0.12);
+}
+
+.vcontact-field input::placeholder,
+.vcontact-field textarea::placeholder {
+    color: #999999;
+}
+
+.vcontact-send {
+    width: 100%;
+    padding: 15px 24px;
+    border: 1px solid #d6b36a;
+    background: #d6b36a;
+    color: #171717;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: 0.3s ease;
+}
+
+.vcontact-send:hover {
+    background: #1b1b1b;
+    border-color: #1b1b1b;
+    color: #ffffff;
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.vcontact-faq {
+    padding: 38px;
+    background: #1b1b1b;
+    color: #ffffff;
+}
+
+.vcontact-faq h2 {
+    margin-bottom: 35px;
+    color: #ffffff;
+}
+
+.vcontact-faq-item {
+    padding: 22px 0;
+    border-top: 1px solid rgba(214, 179, 106, 0.25);
+}
+
+.vcontact-faq-item:last-child {
+    border-bottom: 1px solid rgba(214, 179, 106, 0.25);
+}
+
+.vcontact-faq-item h3 {
+    margin: 0 0 9px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.vcontact-faq-item p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.vcontact-map-section {
+    padding: 0 24px 110px;
+}
+
+.vcontact-map-heading {
+    margin-bottom: 35px;
+}
+
+.vcontact-map-heading h2 {
+    color: #1b1b1b;
+}
+
+.vcontact-map {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    border: 1px solid #ded8cc;
+}
+
+.vcontact-map iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+}
+
+/* =========================================================
+   BRANCHES
+   ========================================================= */
+
+.vcontact-branches {
+    padding: 100px 24px;
+    background: #171717;
+    color: #ffffff;
+}
+
+.vcontact-branches-heading {
+    margin-bottom: 50px;
+}
+
+.vcontact-branches-heading h2 {
+    color: #ffffff;
+}
+
+.vcontact-branches-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(214, 179, 106, 0.3);
+    border-bottom: 1px solid rgba(214, 179, 106, 0.3);
+}
+
+.vcontact-branch {
+    padding: 35px 28px;
+    border-right: 1px solid rgba(214, 179, 106, 0.25);
+}
+
+.vcontact-branch:last-child {
+    border-right: none;
+}
+
+.vcontact-branch span {
+    display: block;
+    margin-bottom: 30px;
+    color: #d6b36a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.vcontact-branch h3 {
+    margin: 0 0 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: 500;
+}
+
+.vcontact-branch p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 14px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .vcontact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vcontact-left {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vcontact-intro {
+        gap: 40px;
+    }
+
+    .vcontact-branches-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vcontact-branch:nth-child(2) {
+        border-right: none;
+    }
+
+    .vcontact-branch:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(214, 179, 106, 0.25);
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .vcontact-hero {
+        min-height: 48vh;
+        padding: 70px 20px;
+    }
+
+    .vcontact-eyebrow {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+    }
+
+    .vcontact-hero h1 {
+        font-size: 43px;
+    }
+
+    .vcontact-hero p:last-child {
+        font-size: 15px;
+    }
+
+    .vcontact-section {
+        padding: 70px 20px;
+    }
+
+    .vcontact-intro {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 45px;
+    }
+
+    .vcontact-intro h2,
+    .vcontact-form-card h2,
+    .vcontact-faq h2,
+    .vcontact-map-heading h2,
+    .vcontact-branches-heading h2 {
+        font-size: 32px;
+    }
+
+    .vcontact-left {
+        grid-template-columns: 1fr;
+    }
+
+    .vcontact-whatsapp-card {
+        grid-column: auto;
+    }
+
+    .vcontact-form-card {
+        padding: 28px 22px;
+    }
+
+    .vcontact-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .vcontact-faq {
+        padding: 28px 22px;
+    }
+
+    .vcontact-map-section {
+        padding: 0 20px 70px;
+    }
+
+    .vcontact-map {
+        height: 320px;
+    }
+
+    .vcontact-branches {
+        padding: 70px 20px;
+    }
+
+    .vcontact-branches-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vcontact-branch,
+    .vcontact-branch:nth-child(2) {
+        border-right: none;
+        border-bottom: 1px solid rgba(214, 179, 106, 0.25);
+    }
+
+    .vcontact-branch:last-child {
+        border-bottom: none;
+    }
+}
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .vcontact-hero h1 {
+        font-size: 36px;
+    }
+
+    .vcontact-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .vcontact-map-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .vcontact-branches {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}

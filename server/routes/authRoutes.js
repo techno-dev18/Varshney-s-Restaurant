@@ -6,10 +6,12 @@ const User = require("../models/User");
 
 const router = express.Router();
 
+/*
+  REGISTER
+  Public route
+  New users are always customers.
+*/
 
-// ==========================
-// REGISTER
-// ==========================
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -21,32 +23,40 @@ router.post("/register", async (req, res) => {
       gender,
     } = req.body;
 
-    // Check required fields
-    if (!name || !phone || !email || !password || !dob || !gender) {
+    if (
+      !name ||
+      !phone ||
+      !email ||
+      !password ||
+      !dob ||
+      !gender
+    ) {
       return res.status(400).json({
-        message: "All fields are required",
+        message: "All fields are required.",
       });
     }
 
-    // Check existing user
+    const normalizedEmail = email.toLowerCase().trim();
+
     const existingUser = await User.findOne({
-      email: email.toLowerCase(),
+      email: normalizedEmail,
     });
 
     if (existingUser) {
       return res.status(400).json({
-        message: "User already exists with this email",
+        message: "User already exists with this email.",
       });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
 
-    // Create customer
     const user = await User.create({
-      name,
-      phone,
-      email: email.toLowerCase(),
+      name: name.trim(),
+      phone: phone.trim(),
+      email: normalizedEmail,
       password: hashedPassword,
       dob,
       gender,
@@ -54,7 +64,7 @@ router.post("/register", async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Registration successful",
+      message: "Registration successful.",
       user: {
         id: user._id,
         name: user.name,
@@ -65,42 +75,44 @@ router.post("/register", async (req, res) => {
         role: user.role,
       },
     });
-
   } catch (error) {
     console.error("Register Error:", error);
 
     res.status(500).json({
-      message: "Registration failed",
+      message: "Registration failed.",
     });
   }
 });
 
+/*
+  LOGIN
+*/
 
-// ==========================
-// LOGIN
-// ==========================
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {
+      email,
+      password,
+    } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({
-        message: "Email and password are required",
+        message: "Email and password are required.",
       });
     }
 
-    // Find user
+    const normalizedEmail = email.toLowerCase().trim();
+
     const user = await User.findOne({
-      email: email.toLowerCase(),
+      email: normalizedEmail,
     });
 
     if (!user) {
       return res.status(401).json({
-        message: "Invalid email or password",
+        message: "Invalid email or password.",
       });
     }
 
-    // Check password
     const passwordMatch = await bcrypt.compare(
       password,
       user.password
@@ -108,11 +120,10 @@ router.post("/login", async (req, res) => {
 
     if (!passwordMatch) {
       return res.status(401).json({
-        message: "Invalid email or password",
+        message: "Invalid email or password.",
       });
     }
 
-    // Create JWT
     const token = jwt.sign(
       {
         userId: user._id,
@@ -125,10 +136,8 @@ router.post("/login", async (req, res) => {
     );
 
     res.json({
-      message: "Login successful",
-
+      message: "Login successful.",
       token,
-
       user: {
         id: user._id,
         name: user.name,
@@ -139,15 +148,13 @@ router.post("/login", async (req, res) => {
         role: user.role,
       },
     });
-
   } catch (error) {
     console.error("Login Error:", error);
 
     res.status(500).json({
-      message: "Login failed",
+      message: "Login failed.",
     });
   }
 });
-
 
 module.exports = router;

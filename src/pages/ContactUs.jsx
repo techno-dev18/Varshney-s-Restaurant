@@ -1,5 +1,5 @@
 import React from "react";
-import "../Appcss/ContactUs.css";
+import "../Css/ContactUs.css";
 
 function ContactUs() {
   const handleSubmit = (e) => {
@@ -7,156 +7,413 @@ function ContactUs() {
     alert("Thank you! We will contact you soon.");
   };
 
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent(
+      "Hello Varshney's Group, I need assistance regarding your restaurant, orders, reservations, or catering services."
+    );
+
+    window.open(
+      `https://wa.me/919876543210?text=${message}`,
+      "_blank"
+    );
+  };
+
   return (
-    <>
-      {/* HERO */}
-      <section className="hero-section">
-        <h1>Contact Us</h1>
-        <p>We're here to help you 24/7</p>
+    <main className="vcontact">
+
+      {/* =====================================================
+          HERO
+      ===================================================== */}
+
+      <section className="vcontact-hero">
+        <div className="vcontact-hero-content">
+          <p className="vcontact-eyebrow">Varshney's Group</p>
+
+          <h1>Contact Us</h1>
+
+          <span className="vcontact-rule"></span>
+
+          <p>
+            We are here to help with your dining,
+            reservations and celebrations.
+          </p>
+        </div>
       </section>
 
-      <div className="contact-container">
-        <div className="contact-row">
+      {/* =====================================================
+          MAIN CONTACT CONTENT
+      ===================================================== */}
 
-          {/* LEFT SIDE */}
-          <div className="contact-left">
+      <section className="vcontact-section">
+        <div className="vcontact-container">
 
-            <div className="contact-card">
-              <h3>📍 Address</h3>
-              <p>Varshney's Group Restaurant</p>
-              <p>123 Main Street, Delhi, India</p>
+          <div className="vcontact-intro">
+            <div>
+              <p className="vcontact-kicker">Get in touch</p>
+
+              <h2>
+                We'd love to hear from you
+              </h2>
             </div>
 
-            <div className="contact-card">
-              <h3>📞 Phone</h3>
-              <p>+91 9876543210</p>
-              <p>+91 9123456780</p>
-            </div>
+            <p>
+              Whether you have a question about our menu,
+              want to reserve a table, plan an event or simply
+              share your experience, our team is ready to assist you.
+            </p>
+          </div>
 
-            <div className="contact-card">
-              <h3>📧 Email</h3>
-              <p>info@varshneys.com</p>
-              <p>support@varshneys.com</p>
-            </div>
+          <div className="vcontact-grid">
 
-            <div className="contact-card">
-              <h3>⏰ Opening Hours</h3>
-              <p>Mon - Sun: 10:00 AM – 11:00 PM</p>
-            </div>
+            {/* =================================================
+                LEFT COLUMN
+            ================================================= */}
 
-            <div className="contact-card">
-              <h3>🌐 Follow Us</h3>
+            <div className="vcontact-left">
 
-              <div className="social-icons">
-                {/* <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a> */}
+              <div className="vcontact-card">
+                <span className="vcontact-card-label">
+                  Visit us
+                </span>
+
+                <h3>Our Address</h3>
+
+                <p>
+                  Varshney's Group Restaurant
+                </p>
+
+                <p>
+                  123 Main Street,
+                  <br />
+                  Delhi, India
+                </p>
               </div>
-            </div>
 
-            <div className="contact-card">
-              <h3>💬 Need Instant Help?</h3>
+              <div className="vcontact-card">
+                <span className="vcontact-card-label">
+                  Call us
+                </span>
 
-              <p>
-                Chat with our support team on WhatsApp for quick assistance regarding
-                orders, reservations, and catering services.
-              </p>
+                <h3>Phone</h3>
 
-              <button className="whatsapp-btn">
-                Chat on WhatsApp
-              </button>
-            </div>
+                <p>+91 9876543210</p>
+                <p>+91 9123456780</p>
+              </div>
 
-          </div>
+              <div className="vcontact-card">
+                <span className="vcontact-card-label">
+                  Write to us
+                </span>
 
-          {/* RIGHT SIDE */}
-          <div className="contact-right">
+                <h3>Email</h3>
 
-            <div className="contact-card contact-form">
-              <h3>Send a Message</h3>
+                <p>info@varshneys.com</p>
+                <p>support@varshneys.com</p>
+              </div>
 
-              <form onSubmit={handleSubmit}>
+              <div className="vcontact-card">
+                <span className="vcontact-card-label">
+                  Opening hours
+                </span>
 
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  required
-                />
+                <h3>We're open</h3>
 
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  required
-                />
+                <p>
+                  Monday – Sunday
+                </p>
 
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                />
+                <p>
+                  10:00 AM – 11:00 PM
+                </p>
+              </div>
 
-                <select>
-                  <option>General Inquiry</option>
-                  <option>Table Booking</option>
-                  <option>Order Issue</option>
-                  <option>Feedback</option>
-                  <option>Partnership</option>
-                </select>
+              <div className="vcontact-card vcontact-whatsapp-card">
+                <span className="vcontact-card-label">
+                  Need quick assistance?
+                </span>
 
-                <textarea
-                  rows="5"
-                  placeholder="Your Message"
-                ></textarea>
+                <h3>Chat with us</h3>
 
-                <button type="submit" className="send-btn">
-                  Send Message
+                <p>
+                  Get quick assistance regarding orders,
+                  reservations and catering services.
+                </p>
+
+                <button
+                  type="button"
+                  className="vcontact-whatsapp"
+                  onClick={handleWhatsApp}
+                >
+                  Chat on WhatsApp
                 </button>
+              </div>
 
-              </form>
             </div>
 
-            {/* FAQ */}
-            <div className="contact-card">
-              <h3>❓ Frequently Asked Questions</h3>
+            {/* =================================================
+                RIGHT COLUMN
+            ================================================= */}
 
-              <p><strong>Q:</strong> Do you offer home delivery?</p>
-              <p><strong>A:</strong> Yes, across major cities.</p>
+            <div className="vcontact-right">
 
-              <p><strong>Q:</strong> Can I book a hall?</p>
-              <p><strong>A:</strong> Yes, through our booking section.</p>
+              <div className="vcontact-form-card">
 
-              <p><strong>Q:</strong> Do you provide catering?</p>
-              <p><strong>A:</strong> Yes for weddings & events.</p>
+                <p className="vcontact-kicker">
+                  Send us a message
+                </p>
+
+                <h2>
+                  How can we help?
+                </h2>
+
+                <p className="vcontact-form-intro">
+                  Fill in the details below and our team
+                  will get back to you as soon as possible.
+                </p>
+
+                <form onSubmit={handleSubmit}>
+
+                  <div className="vcontact-form-row">
+
+                    <div className="vcontact-field">
+                      <label htmlFor="contact-name">
+                        Full Name
+                      </label>
+
+                      <input
+                        id="contact-name"
+                        type="text"
+                        placeholder="Enter your name"
+                        required
+                      />
+                    </div>
+
+                    <div className="vcontact-field">
+                      <label htmlFor="contact-email">
+                        Email Address
+                      </label>
+
+                      <input
+                        id="contact-email"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
+
+                  </div>
+
+                  <div className="vcontact-form-row">
+
+                    <div className="vcontact-field">
+                      <label htmlFor="contact-phone">
+                        Phone Number
+                      </label>
+
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+
+                    <div className="vcontact-field">
+                      <label htmlFor="contact-subject">
+                        Subject
+                      </label>
+
+                      <select
+                        id="contact-subject"
+                        defaultValue="General Inquiry"
+                      >
+                        <option value="General Inquiry">
+                          General Inquiry
+                        </option>
+
+                        <option value="Table Booking">
+                          Table Booking
+                        </option>
+
+                        <option value="Order Issue">
+                          Order Issue
+                        </option>
+
+                        <option value="Feedback">
+                          Feedback
+                        </option>
+
+                        <option value="Partnership">
+                          Partnership
+                        </option>
+
+                        <option value="Catering">
+                          Catering
+                        </option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div className="vcontact-field">
+                    <label htmlFor="contact-message">
+                      Your Message
+                    </label>
+
+                    <textarea
+                      id="contact-message"
+                      rows="7"
+                      placeholder="Write your message..."
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="vcontact-send"
+                  >
+                    Send Message
+                  </button>
+
+                </form>
+
+              </div>
+
+              {/* FAQ */}
+
+              <div className="vcontact-faq">
+
+                <p className="vcontact-kicker">
+                  FAQ
+                </p>
+
+                <h2>
+                  Frequently asked questions
+                </h2>
+
+                <div className="vcontact-faq-item">
+                  <h3>
+                    Do you offer home delivery?
+                  </h3>
+
+                  <p>
+                    Yes. We offer food delivery services
+                    across selected locations.
+                  </p>
+                </div>
+
+                <div className="vcontact-faq-item">
+                  <h3>
+                    Can I book a hall?
+                  </h3>
+
+                  <p>
+                    Yes. Our halls are available for
+                    weddings, birthdays, parties and
+                    corporate events.
+                  </p>
+                </div>
+
+                <div className="vcontact-faq-item">
+                  <h3>
+                    Do you provide catering?
+                  </h3>
+
+                  <p>
+                    Yes. Catering services are available
+                    for weddings, celebrations and events.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* =====================================================
+          MAP
+      ===================================================== */}
+
+      <section className="vcontact-map-section">
+
+        <div className="vcontact-container">
+
+          <div className="vcontact-map-heading">
+            <p className="vcontact-kicker">
+              Find us
+            </p>
+
+            <h2>
+              Visit Varshney's Group
+            </h2>
+          </div>
+
+          <div className="vcontact-map">
+            <iframe
+              title="Varshney's Group Delhi Location"
+              src="https://maps.google.com/maps?q=delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* =====================================================
+          BRANCHES
+      ===================================================== */}
+
+      <section className="vcontact-branches">
+
+        <div className="vcontact-container">
+
+          <div className="vcontact-branches-heading">
+            <p className="vcontact-kicker">
+              Our presence
+            </p>
+
+            <h2>
+              Our Branches
+            </h2>
+          </div>
+
+          <div className="vcontact-branches-grid">
+
+            <div className="vcontact-branch">
+              <span>01</span>
+              <h3>Delhi</h3>
+              <p>Main Branch</p>
+            </div>
+
+            <div className="vcontact-branch">
+              <span>02</span>
+              <h3>Noida</h3>
+              <p>Sector 18</p>
+            </div>
+
+            <div className="vcontact-branch">
+              <span>03</span>
+              <h3>Gurgaon</h3>
+              <p>Cyber City</p>
+            </div>
+
+            <div className="vcontact-branch">
+              <span>04</span>
+              <h3>Agra</h3>
+              <p>Taj Road</p>
             </div>
 
           </div>
 
         </div>
 
-        {/* MAP */}
-        <div className="contact-card map">
-          <h3>📍 Find Us</h3>
+      </section>
 
-          <iframe
-            title="Delhi Location"
-            src="https://maps.google.com/maps?q=delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
-          ></iframe>
-        </div>
-
-        {/* BRANCHES */}
-        <div className="contact-card">
-          <h3>🏢 Our Branches</h3>
-
-          <ul>
-            <li>Delhi - Main Branch</li>
-            <li>Noida - Sector 18</li>
-            <li>Gurgaon - Cyber City</li>
-            <li>Agra - Taj Road</li>
-          </ul>
-        </div>
-
-      </div>
-    </>
+    </main>
   );
 }
 

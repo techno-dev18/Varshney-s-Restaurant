@@ -1,0 +1,765 @@
+/* =========================================================
+   VARSHNEY'S GROUP - ABOUT PAGE
+   ========================================================= */
+
+.vabout {
+    width: 100%;
+    background: #f7f5f0;
+    color: #1b1b1b;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.vabout-hero {
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 24px;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(18, 18, 18, 0.78),
+            rgba(18, 18, 18, 0.78)
+        ),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85")
+        center / cover no-repeat;
+}
+
+.vabout-hero-content {
+    max-width: 800px;
+    color: #ffffff;
+}
+
+.vabout-eyebrow {
+    margin: 0 0 20px;
+    color: #d6b36a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.vabout-hero h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(48px, 6vw, 74px);
+    font-weight: 500;
+}
+
+.vabout-rule {
+    display: block;
+    width: 65px;
+    height: 2px;
+    margin: 25px auto;
+    background: #d6b36a;
+}
+
+.vabout-hero-content > p:last-child {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.vabout-section {
+    padding: 110px 24px;
+    background: #f7f5f0;
+}
+
+.vabout-section--white {
+    background: #ffffff;
+}
+
+.vabout-section--dark {
+    background: #171717;
+    color: #ffffff;
+}
+
+.vabout-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.vabout-kicker {
+    margin: 0 0 14px;
+    color: #8b6a2e;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.vabout-kicker--gold {
+    color: #d6b36a;
+}
+
+.vabout-heading {
+    margin-bottom: 55px;
+}
+
+.vabout-heading h2,
+.vabout-intro h2,
+.vabout-offer h2,
+.vabout-vision-card h2,
+.vabout-team h2,
+.vabout-experience h2,
+.vabout-future h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.vabout-intro {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 90px;
+    align-items: end;
+    margin-bottom: 55px;
+}
+
+.vabout-intro-text p,
+.vabout-story p {
+    margin: 0 0 20px;
+    color: #646464;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.vabout-intro-text p:last-child,
+.vabout-story p:last-child {
+    margin-bottom: 0;
+}
+
+.vabout-intro-text strong {
+    color: #1b1b1b;
+}
+
+.vabout-story {
+    max-width: 900px;
+    margin-left: auto;
+    padding-top: 35px;
+    border-top: 1px solid #ddd7cc;
+}
+
+/* =========================================================
+   CORE VALUES
+   ========================================================= */
+
+.vabout-values {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid #ded8cd;
+    border-bottom: 1px solid #ded8cd;
+}
+
+.vabout-value {
+    min-height: 275px;
+    padding: 30px 24px;
+    border-right: 1px solid #ded8cd;
+}
+
+.vabout-value:last-child {
+    border-right: none;
+}
+
+.vabout-number {
+    display: block;
+    margin-bottom: 45px;
+    color: #b08b46;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.vabout-value h3 {
+    margin: 0 0 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.vabout-value p {
+    margin: 0;
+    color: #707070;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.vabout-offer {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.vabout-offer-text {
+    margin: 25px 0 0;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.vabout-services {
+    display: flex;
+    flex-direction: column;
+}
+
+.vabout-service {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    min-height: 80px;
+    border-top: 1px solid #ded8cd;
+}
+
+.vabout-service:last-child {
+    border-bottom: 1px solid #ded8cd;
+}
+
+.vabout-service span {
+    color: #b08b46;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.vabout-service h3 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* =========================================================
+   FOUNDER
+   ========================================================= */
+
+.vabout-founder {
+    padding: 120px 24px;
+    background: #1b1b1b;
+    color: #ffffff;
+    text-align: center;
+}
+
+.vabout-founder-inner {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.vabout-founder blockquote {
+    margin: 25px 0 30px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(25px, 3vw, 38px);
+    line-height: 1.5;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.vabout-founder-name {
+    color: #d6b36a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   VISION & MISSION
+   ========================================================= */
+
+.vabout-vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.vabout-vision-card {
+    position: relative;
+    padding: 40px;
+    border: 1px solid #e0dbd1;
+    background: #f9f8f5;
+}
+
+.vabout-vision-number {
+    display: block;
+    margin-bottom: 55px;
+    color: #b08b46;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.vabout-vision-card h2 {
+    margin-bottom: 25px;
+    font-size: 34px;
+}
+
+.vabout-vision-card > p:last-child {
+    margin: 0;
+    color: #686868;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.vabout-vision-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.vabout-vision-card li {
+    position: relative;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.vabout-vision-card li::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: #d6b36a;
+}
+
+/* =========================================================
+   JOURNEY
+   ========================================================= */
+
+.vabout-timeline {
+    position: relative;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.vabout-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 105px;
+    width: 1px;
+    background: #d8d1c5;
+}
+
+.vabout-timeline-item {
+    display: grid;
+    grid-template-columns: 105px 1fr;
+    gap: 55px;
+    position: relative;
+    padding-bottom: 55px;
+}
+
+.vabout-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.vabout-timeline-year {
+    position: relative;
+    color: #8b6a2e;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.vabout-timeline-year::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    right: -59px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #d6b36a;
+    background: #f7f5f0;
+}
+
+.vabout-timeline-content {
+    padding-bottom: 10px;
+}
+
+.vabout-timeline-content h3 {
+    margin: 0 0 10px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: 500;
+}
+
+.vabout-timeline-content p {
+    max-width: 650px;
+    margin: 0;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   TEAM
+   ========================================================= */
+
+.vabout-team {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 90px;
+    align-items: center;
+}
+
+.vabout-team h2 {
+    color: #ffffff;
+}
+
+.vabout-team > p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   WHY CHOOSE US
+   ========================================================= */
+
+.vabout-why {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #ded8cd;
+}
+
+.vabout-why-item {
+    min-height: 150px;
+    padding: 28px;
+    border-right: 1px solid #ded8cd;
+    border-bottom: 1px solid #ded8cd;
+}
+
+.vabout-why-item:nth-child(3n) {
+    border-right: none;
+}
+
+.vabout-why-item span {
+    display: block;
+    margin-bottom: 30px;
+    color: #b08b46;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.vabout-why-item p {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+}
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
+.vabout-experience {
+    padding: 120px 24px;
+    background:
+        linear-gradient(
+            rgba(15, 15, 15, 0.82),
+            rgba(15, 15, 15, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85")
+        center / cover no-repeat;
+    color: #ffffff;
+    text-align: center;
+}
+
+.vabout-experience-inner {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.vabout-experience h2 {
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.vabout-experience p:last-child {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+.vabout-achievements {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid #ded8cd;
+    border-bottom: 1px solid #ded8cd;
+}
+
+.vabout-achievement {
+    min-height: 180px;
+    padding: 30px;
+    border-right: 1px solid #ded8cd;
+}
+
+.vabout-achievement:last-child {
+    border-right: none;
+}
+
+.vabout-achievement span {
+    display: block;
+    margin-bottom: 35px;
+    color: #b08b46;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.vabout-achievement h3 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* =========================================================
+   FUTURE
+   ========================================================= */
+
+.vabout-future {
+    padding: 120px 24px;
+    background: #171717;
+    color: #ffffff;
+    text-align: center;
+}
+
+.vabout-future-inner {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.vabout-future h2 {
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.vabout-future p:last-child {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .vabout-values {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vabout-value:nth-child(3) {
+        border-right: none;
+    }
+
+    .vabout-value:nth-child(-n + 3) {
+        border-bottom: 1px solid #ded8cd;
+    }
+
+    .vabout-offer,
+    .vabout-team {
+        gap: 50px;
+    }
+
+    .vabout-achievements {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vabout-achievement:nth-child(2) {
+        border-right: none;
+    }
+
+    .vabout-achievement:nth-child(-n + 2) {
+        border-bottom: 1px solid #ded8cd;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .vabout-hero {
+        min-height: 48vh;
+        padding: 70px 20px;
+    }
+
+    .vabout-eyebrow {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+    }
+
+    .vabout-hero h1 {
+        font-size: 43px;
+    }
+
+    .vabout-hero-content > p:last-child {
+        font-size: 15px;
+    }
+
+    .vabout-section {
+        padding: 75px 20px;
+    }
+
+    .vabout-intro,
+    .vabout-offer,
+    .vabout-team {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .vabout-heading {
+        margin-bottom: 40px;
+    }
+
+    .vabout-heading h2,
+    .vabout-intro h2,
+    .vabout-offer h2,
+    .vabout-team h2,
+    .vabout-experience h2,
+    .vabout-future h2 {
+        font-size: 34px;
+    }
+
+    .vabout-values {
+        grid-template-columns: 1fr;
+    }
+
+    .vabout-value,
+    .vabout-value:nth-child(3) {
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ded8cd;
+    }
+
+    .vabout-value:last-child {
+        border-bottom: none;
+    }
+
+    .vabout-vision-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vabout-vision-card {
+        padding: 30px;
+    }
+
+    .vabout-timeline::before {
+        left: 75px;
+    }
+
+    .vabout-timeline-item {
+        grid-template-columns: 75px 1fr;
+        gap: 30px;
+    }
+
+    .vabout-timeline-year::after {
+        right: -34px;
+    }
+
+    .vabout-why {
+        grid-template-columns: 1fr;
+    }
+
+    .vabout-why-item,
+    .vabout-why-item:nth-child(3n) {
+        border-right: none;
+    }
+
+    .vabout-achievements {
+        grid-template-columns: 1fr;
+    }
+
+    .vabout-achievement,
+    .vabout-achievement:nth-child(2) {
+        border-right: none;
+        border-bottom: 1px solid #ded8cd;
+    }
+
+    .vabout-achievement:last-child {
+        border-bottom: none;
+    }
+
+    .vabout-founder,
+    .vabout-experience,
+    .vabout-future {
+        padding: 85px 20px;
+    }
+
+    .vabout-founder blockquote {
+        font-size: 25px;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .vabout-hero h1 {
+        font-size: 36px;
+    }
+
+    .vabout-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .vabout-vision-card {
+        padding: 25px;
+    }
+
+    .vabout-timeline {
+        margin-left: 0;
+    }
+
+    .vabout-timeline::before {
+        left: 62px;
+    }
+
+    .vabout-timeline-item {
+        grid-template-columns: 62px 1fr;
+        gap: 22px;
+    }
+
+    .vabout-timeline-year::after {
+        right: -26px;
+    }
+}
