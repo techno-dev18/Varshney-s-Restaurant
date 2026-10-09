@@ -1,5 +1,6 @@
 const express = require("express");
-
+const Food = require("../models/Food");
+const mongoose = require("mongoose");
 const Order = require("../models/Order");
 
 const {
@@ -15,50 +16,158 @@ const router = express.Router();
   Logged-in customer
 */
 
+
 router.post("/", protect, async (req, res) => {
   try {
     const {
       items,
-      totalAmount,
-      orderType,
-      deliveryAddress,
-      phone,
-      paymentMethod,
+      orderType = "delivery",
+      deliveryAddress = "",
+      phone = "",
+      paymentMethod = "cash",
     } = req.body;
 
-    if (!items || items.length === 0) {
+    const validOrderTypes = ["delivery", "takeaway", "dine-in"];
+
+    if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
-        message: "Order must contain at least one item.",
+        message: "Your order must contain at least one item.",
       });
     }
 
-    if (
-      totalAmount === undefined ||
-      totalAmount < 0
-    ) {
+    if (items.length > 50) {
       return res.status(400).json({
-        message: "Invalid total amount.",
+        message: "Too many different items in one order.",
       });
     }
+
+    if (!validOrderTypes.includes(orderType)) {
+      return res.status(400).json({
+        message: "Invalid order type.",
+      });
+    }
+
+    // Online payments must not be accepted until a payment
+    // gateway has been integrated and verified.
+    if (paymentMethod !== "cash") {
+      return res.status(400).json({
+        message: "Only cash payment is currently supported.",
+      });
+    }
+
+    if (typeof phone !== "string" || !phone.trim()) {
+      return res.status(400).json({
+        message: "Please provide a contact phone number.",
+      });
+    }
+
+    if (orderType === "delivery" &&
+        (typeof deliveryAddress !== "string" ||
+         !deliveryAddress.trim())) {
+      return res.status(400).json({
+        message: "Please provide your delivery address.",
+      });
+    }
+
+    // Validate item IDs and quantities before querying MongoDB.
+    const requestedItems = [];
+    const quantitiesById = new Map();
+
+    for (const item of items) {
+      const foodId = item.food || item.foodId;
+      const quantity = Number(item.quantity);
+
+      if (!mongoose.isValidObjectId(foodId)) {
+        return res.status(400).json({
+          message: "An item in your cart has an invalid ID.",
+        });
+      }
+
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+        return res.status(400).json({
+          message: "Each item quantity must be between 1 and 99.",
+        });
+      }
+
+      const id = String(foodId);
+      quantitiesById.set(
+        id,
+        (quantitiesById.get(id) || 0) + quantity
+      );
+    }
+
+    for (const [foodId, quantity] of quantitiesById) {
+      if (quantity > 99) {
+        return res.status(400).json({
+          message: "The maximum quantity per dish is 99.",
+        });
+      }
+
+      requestedItems.push({ foodId, quantity });
+    }
+
+    const foods = await Food.find({
+      _id: { $in: requestedItems.map((item) => item.foodId) },
+    });
+
+    if (foods.length !== requestedItems.length) {
+      return res.status(400).json({
+        message: "One or more selected dishes no longer exist.",
+      });
+    }
+
+    const foodById = new Map(
+      foods.map((food) => [String(food._id), food])
+    );
+
+    let totalAmount = 0;
+
+    const orderItems = requestedItems.map(({ foodId, quantity }) => {
+      const food = foodById.get(foodId);
+
+      const regularPrice = Number(food.price);
+      const discountedPrice = Number(food.discountedPrice);
+      const price =
+        Number.isFinite(discountedPrice) && discountedPrice > 0
+          ? discountedPrice
+          : regularPrice;
+
+      if (!Number.isFinite(price) || price < 0) {
+        throw new Error(`Invalid price for food item ${foodId}`);
+      }
+
+      totalAmount += price * quantity;
+
+      return {
+        food: food._id,
+        name: food.name,
+        price,
+        quantity,
+        image: food.image || food.imgUrl || "",
+      };
+    });
 
     const order = await Order.create({
       user: req.user.userId,
-      items,
-      totalAmount,
+      items: orderItems,
+      totalAmount: Number(totalAmount.toFixed(2)),
       orderType,
-      deliveryAddress,
-      phone,
-      paymentMethod,
+      deliveryAddress:
+        orderType === "delivery" ? deliveryAddress.trim() : "",
+      phone: phone.trim(),
+      paymentMethod: "cash",
+      paymentStatus: "pending",
+      orderStatus: "placed",
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Order placed successfully.",
       order,
     });
   } catch (error) {
-    console.error("Create Order Error:", error);
+    console.error("Create Order Error:", error.message);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to place order.",
     });
   }

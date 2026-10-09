@@ -1,7 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../components/CartContext";
 import "../Css/Cart.css";
+
+function getFoodId(food) {
+  return food._id || food.id;
+}
+
+function getFoodPrice(food) {
+  const discountedPrice = Number(food.discountedPrice);
+  const price = Number(food.price || 0);
+
+  return discountedPrice > 0 ? discountedPrice : price;
+}
 
 function Cart() {
   const {
@@ -9,305 +19,201 @@ function Cart() {
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
+    clearCart,
     totalPrice,
   } = useCart();
 
-  const getItemId = (item) => item._id || item.id;
+const navigate = useNavigate();
 
-  const getItemPrice = (item) =>
-    item.discountedPrice || item.price || 0;
+  const formatPrice = (amount) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2,
+    }).format(amount);
+const handleCheckout = () => {
+  navigate("/checkout");
+};
+ 
 
   if (cartItems.length === 0) {
     return (
-      <main className="vcart">
-        {/* HERO */}
-        <section className="vcart-hero">
-          <div className="vcart-hero-content">
-            <p className="vcart-eyebrow">Varshney's Group</p>
-
-            <h1>Your Cart</h1>
-
-            <span className="vcart-rule"></span>
-
-            <p>
-              Review your selections before placing your order.
-            </p>
+      <main className="cart-page">
+        <section className="cart-empty">
+          <div className="cart-empty-icon" aria-hidden="true">
+            ♧
           </div>
-        </section>
 
-        {/* EMPTY CART */}
-        <section className="vcart-empty-section">
-          <div className="vcart-empty">
+          <p className="cart-eyebrow">YOUR DINING EXPERIENCE STARTS HERE</p>
+          <h1>Your cart is waiting.</h1>
+          <p className="cart-empty-description">
+            Discover your favourites, choose your dishes, and add something
+            delicious to your cart.
+          </p>
 
-            <span className="vcart-empty-number">
-              00
-            </span>
+          <Link to="/foodmenu" className="cart-primary-button">
+            Explore Our Menu <span aria-hidden="true">→</span>
+          </Link>
 
-            <h2>Your cart is empty</h2>
-
-            <p>
-              You haven't added anything to your cart yet.
-              Explore our menu and discover something delicious.
-            </p>
-
-            <Link
-              to="/foodmenu"
-              className="vcart-primary-btn"
-            >
-              Explore the Menu
-            </Link>
-
-          </div>
+          <Link to="/" className="cart-back-link">
+            Back to home
+          </Link>
         </section>
       </main>
     );
   }
 
   return (
-    <main className="vcart">
-
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
-      <section className="vcart-hero">
-        <div className="vcart-hero-content">
-
-          <p className="vcart-eyebrow">
-            Varshney's Group
-          </p>
-
-          <h1>Your Cart</h1>
-
-          <span className="vcart-rule"></span>
-
-          <p>
-            Review your selections before placing your order.
-          </p>
-
-        </div>
-      </section>
-
-      {/* =====================================================
-          CART CONTENT
-      ===================================================== */}
-
-      <section className="vcart-section">
-
-        <div className="vcart-container">
-
-          <div className="vcart-heading">
-
-            <div>
-              <p className="vcart-kicker">
-                Your selection
-              </p>
-
-              <h2>
-                {cartItems.length}{" "}
-                {cartItems.length === 1
-                  ? "item"
-                  : "items"}{" "}
-                in your cart
-              </h2>
-            </div>
-
-            <Link
-              to="/foodmenu"
-              className="vcart-continue"
-            >
-              ← Continue Shopping
-            </Link>
-
+    <main className="cart-page">
+      <section className="cart-container">
+        <div className="cart-heading">
+          <div>
+            <p className="cart-eyebrow">A LITTLE SOMETHING DELICIOUS</p>
+            <h1>Your Shopping Cart</h1>
+            <p className="cart-heading-description">
+              Review your selection before continuing.
+            </p>
           </div>
 
-          <div className="vcart-layout">
+          <div className="cart-item-count">
+            <span>{cartItems.reduce((count, item) => count + item.quantity, 0)}</span>
+            <span>items</span>
+          </div>
+        </div>
 
-            {/* =================================================
-                ITEMS
-            ================================================= */}
+        <div className="cart-layout">
+          <section className="cart-items-section">
+            <div className="cart-section-heading">
+              <h2>Your selection</h2>
 
-            <div className="vcart-items">
+              <button
+                type="button"
+                className="cart-clear-button"
+                onClick={clearCart}
+              >
+                Clear cart
+              </button>
+            </div>
 
-              {cartItems.map((item) => {
-
-                const itemId = getItemId(item);
-                const price = getItemPrice(item);
+            <div className="cart-items">
+              {cartItems.map((food) => {
+                const id = getFoodId(food);
+                const price = getFoodPrice(food);
+                const quantity = food.quantity || 1;
+                const image = food.image || food.imgUrl;
 
                 return (
-                  <article
-                    className="vcart-item"
-                    key={itemId}
-                  >
-
-                    {/* IMAGE */}
-
-                    <div className="vcart-image-wrapper">
-
-                      <img
-                        src={
-                          item.image ||
-                          item.imgUrl ||
-                          item.imgURL
-                        }
-                        alt={item.name}
-                      />
-
+                  <article className="cart-item" key={id}>
+                    <div className="cart-item-image">
+                      {image ? (
+                        <img src={image} alt={food.name || "Food item"} />
+                      ) : (
+                        <div className="cart-image-placeholder">
+                          <span aria-hidden="true">✦</span>
+                          <span>Varshney's</span>
+                        </div>
+                      )}
                     </div>
 
-                    {/* DETAILS */}
-
-                    <div className="vcart-item-content">
-
-                      <div className="vcart-item-header">
-
-                        <div>
-                          <p className="vcart-item-category">
-                            {item.category || "Food"}
-                          </p>
-
-                          <h3>
-                            {item.name}
-                          </h3>
-                        </div>
-
-                        <button
-                          type="button"
-                          className="vcart-remove-top"
-                          onClick={() =>
-                            removeFromCart(itemId)
-                          }
-                          aria-label={`Remove ${item.name}`}
-                        >
-                          ×
-                        </button>
-
-                      </div>
-
-                      <p className="vcart-item-price">
-                        ₹{Number(price).toLocaleString("en-IN")}
+                    <div className="cart-item-info">
+                      <p className="cart-item-category">
+                        {food.category || "SELECTED DISH"}
                       </p>
 
-                      {/* QUANTITY */}
+                      <h3>{food.name || food.title || "Food item"}</h3>
 
-                      <div className="vcart-item-bottom">
+                      <p className="cart-item-unit-price">
+                        {formatPrice(price)} <span>/ item</span>
+                      </p>
 
-                        <div className="vcart-quantity">
-
+                      <div className="cart-item-actions">
+                        <div className="cart-quantity-control">
                           <button
                             type="button"
-                            onClick={() =>
-                              decreaseQuantity(itemId)
-                            }
-                            aria-label="Decrease quantity"
+                            onClick={() => decreaseQuantity(id)}
+                            aria-label={`Decrease quantity of ${food.name}`}
                           >
                             −
                           </button>
 
-                          <span>
-                            {item.quantity}
-                          </span>
+                          <span aria-live="polite">{quantity}</span>
 
                           <button
                             type="button"
-                            onClick={() =>
-                              increaseQuantity(itemId)
-                            }
-                            aria-label="Increase quantity"
+                            onClick={() => increaseQuantity(id)}
+                            aria-label={`Increase quantity of ${food.name}`}
                           >
                             +
                           </button>
-
                         </div>
 
-                        <span className="vcart-item-total">
-                          ₹
-                          {(
-                            Number(price) *
-                            Number(item.quantity || 1)
-                          ).toLocaleString("en-IN")}
-                        </span>
-
+                        <button
+                          type="button"
+                          className="cart-remove-button"
+                          onClick={() => removeFromCart(id)}
+                        >
+                          Remove
+                        </button>
                       </div>
-
                     </div>
 
+                    <div className="cart-item-total">
+                      <span>Item total</span>
+                      <strong>{formatPrice(price * quantity)}</strong>
+                    </div>
                   </article>
                 );
               })}
-
             </div>
 
-            {/* =================================================
-                ORDER SUMMARY
-            ================================================= */}
+            <Link to="/foodmenu" className="cart-continue-link">
+              <span aria-hidden="true">←</span> Continue shopping
+            </Link>
+          </section>
 
-            <aside className="vcart-summary">
+          <aside className="cart-summary">
+            <p className="cart-eyebrow">ORDER OVERVIEW</p>
+            <h2>Order Summary</h2>
 
-              <p className="vcart-kicker">
-                Order summary
-              </p>
+            <div className="cart-summary-row">
+              <span>Items ({cartItems.reduce((count, item) => count + item.quantity, 0)})</span>
+              <span>{formatPrice(totalPrice)}</span>
+            </div>
 
-              <h2>
-                Your Order
-              </h2>
+            <div className="cart-summary-row">
+              <span>Delivery</span>
+              <span className="cart-delivery-note">Calculated at checkout</span>
+            </div>
 
-              <div className="vcart-summary-line">
-                <span>Items</span>
-                <span>{cartItems.length}</span>
-              </div>
+            <div className="cart-summary-divider" />
 
-              <div className="vcart-summary-line">
-                <span>Subtotal</span>
-                <span>
-                  ₹
-                  {Number(totalPrice).toLocaleString("en-IN")}
-                </span>
-              </div>
+            <div className="cart-summary-total">
+              <span>Subtotal</span>
+              <strong>{formatPrice(totalPrice)}</strong>
+            </div>
 
-              <div className="vcart-summary-line">
-                <span>Delivery</span>
-                <span className="vcart-free">
-                  To be calculated
-                </span>
-              </div>
+            <p className="cart-summary-note">
+              Your final payable amount may include delivery charges and
+              applicable taxes at checkout.
+            </p>
 
-              <div className="vcart-summary-divider"></div>
+            <button
+              type="button"
+              className="cart-checkout-button"
+              onClick={handleCheckout}
+            >
+              Proceed to Checkout <span aria-hidden="true">→</span>
+            </button>
 
-              <div className="vcart-total">
-                <span>Total</span>
+           
 
-                <strong>
-                  ₹
-                  {Number(totalPrice).toLocaleString("en-IN")}
-                </strong>
-              </div>
-
-              <button
-                type="button"
-                className="vcart-checkout"
-                onClick={() =>
-                  alert(
-                    "Checkout will be available soon."
-                  )
-                }
-              >
-                Proceed to Checkout
-              </button>
-
-              <p className="vcart-secure">
-                Secure checkout · Freshly prepared ·
-                Quality service
-              </p>
-
-            </aside>
-
-          </div>
-
+            <div className="cart-secure-note">
+              <span aria-hidden="true">◇</span>
+              <span>Freshly selected. Carefully prepared.</span>
+            </div>
+          </aside>
         </div>
-
       </section>
-
     </main>
   );
 }

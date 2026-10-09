@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Css/FoodMenu.css";
 import { useCart } from "../components/CartContext";
 
+import { Link } from "react-router-dom";
 function FoodMenu() {
   const { addToCart } = useCart();
 
@@ -524,6 +525,9 @@ function FoodMenu() {
                   </p>
 
 
+<Link to={`/food/${food._id || food.id}`} className="view-details-link">
+  View Details
+</Link>
                   <div className="food-meta">
 
                     <span>

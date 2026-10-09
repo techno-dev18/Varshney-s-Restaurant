@@ -813,3 +813,24 @@
   }
 
 }
+
+.view-details-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 9px 14px;
+  color: #80652f;
+  background: transparent;
+  border: 1px solid #c6ad78;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.view-details-link:hover {
+  color: #fff;
+  background: #80652f;
+}

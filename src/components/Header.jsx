@@ -30,9 +30,7 @@ function Header() {
 
   const accountRef = useRef(null);
 
-  /* =====================================================
-     LOAD LOGGED-IN USER
-     ===================================================== */
+  /* ================= LOAD USER ================= */
 
   useEffect(() => {
     const loadUser = () => {
@@ -59,9 +57,7 @@ function Header() {
     };
   }, []);
 
-  /* =====================================================
-     HEADER SCROLL EFFECT
-     ===================================================== */
+  /* ================= SCROLL EFFECT ================= */
 
   useEffect(() => {
     const onScroll = () => {
@@ -79,9 +75,7 @@ function Header() {
     };
   }, []);
 
-  /* =====================================================
-     CLOSE DROPDOWN / MENU
-     ===================================================== */
+  /* ================= CLOSE DROPDOWN ================= */
 
   useEffect(() => {
     const onMouseDown = (event) => {
@@ -109,18 +103,14 @@ function Header() {
     };
   }, []);
 
-  /* =====================================================
-     CLOSE MENUS
-     ===================================================== */
+  /* ================= CLOSE MENUS ================= */
 
   const closeMenus = () => {
     setMenuOpen(false);
     setAccountOpen(false);
   };
 
-  /* =====================================================
-     LOGOUT
-     ===================================================== */
+  /* ================= LOGOUT ================= */
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -133,58 +123,51 @@ function Header() {
     navigate("/");
   };
 
-  /* =====================================================
-     CART COUNT
-     ===================================================== */
+  /* ================= CART COUNT ================= */
 
-  const cartCount = cartItems.length;
+  const cartCount = cartItems.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
 
-  /* =====================================================
-     USER NAME
-     ===================================================== */
+  /* ================= USER NAME ================= */
 
   const userName = user?.name || "User";
 
   return (
-    <header
-      className={`vh-header${scrolled ? " is-scrolled" : ""}`}
-    >
-      <div className="vh-inner">
+    <header className={`header${scrolled ? " is-scrolled" : ""}`}>
+      <div className="header-inner">
 
-        {/* =================================================
-            BRAND
-            ================================================= */}
+        {/* ================= BRAND ================= */}
 
         <Link
           to="/"
-          className="vh-brand"
+          className="brand"
           onClick={closeMenus}
           aria-label="Varshney's Restaurant, home"
         >
           <img
             src={logo}
             alt="Varshney's Restaurant"
-            className="vh-logo"
+            className="logo"
           />
 
-          <span className="vh-wordmark">
-            <span className="vh-name">
+          <span className="wordmark">
+            <span className="name">
               Varshney's
             </span>
 
-            <span className="vh-sub">
+            <span className="sub">
               Restaurant
             </span>
           </span>
         </Link>
 
-        {/* =================================================
-            NAVIGATION
-            ================================================= */}
+        {/* ================= NAVIGATION ================= */}
 
         <nav
           id="primary-nav"
-          className={`vh-nav${menuOpen ? " is-open" : ""}`}
+          className={`nav${menuOpen ? " is-open" : ""}`}
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => (
@@ -194,7 +177,7 @@ function Header() {
               end={link.end}
               onClick={closeMenus}
               className={({ isActive }) =>
-                `vh-link${isActive ? " is-active" : ""}`
+                `nav-link${isActive ? " is-active" : ""}`
               }
             >
               {link.label}
@@ -202,17 +185,15 @@ function Header() {
           ))}
         </nav>
 
-        {/* =================================================
-            ACTIONS
-            ================================================= */}
+        {/* ================= ACTIONS ================= */}
 
-        <div className="vh-actions">
+        <div className="header-actions">
 
           {/* CART */}
 
           <Link
             to="/cart"
-            className="vh-icon-btn"
+            className="icon-button"
             onClick={closeMenus}
             aria-label={`Cart, ${cartCount} ${
               cartCount === 1 ? "item" : "items"
@@ -221,7 +202,7 @@ function Header() {
             <FaShoppingCart />
 
             {cartCount > 0 && (
-              <span className="vh-badge">
+              <span className="badge">
                 {cartCount}
               </span>
             )}
@@ -230,12 +211,12 @@ function Header() {
           {/* ACCOUNT */}
 
           <div
-            className="vh-account"
+            className="account"
             ref={accountRef}
           >
             <button
               type="button"
-              className="vh-icon-btn"
+              className="icon-button"
               aria-label="Account menu"
               aria-expanded={accountOpen}
               onClick={() =>
@@ -246,31 +227,23 @@ function Header() {
             </button>
 
             {accountOpen && (
-              <div className="vh-dropdown">
+              <div className="dropdown">
 
                 {user ? (
                   <>
-                    {/* USER INFORMATION */}
-
-                    <div className="vh-user-header">
-                      <span className="vh-user-welcome">
+                    <div className="user-header">
+                      <span className="user-welcome">
                         Welcome
                       </span>
 
-                      <strong>
-                        {userName}
-                      </strong>
+                      <strong>{userName}</strong>
 
                       {user.email && (
-                        <small>
-                          {user.email}
-                        </small>
+                        <small>{user.email}</small>
                       )}
                     </div>
 
-                    <div className="vh-dropdown-divider"></div>
-
-                    {/* ACCOUNT LINKS */}
+                    <div className="dropdown-divider"></div>
 
                     <Link
                       to="/orders"
@@ -293,13 +266,11 @@ function Header() {
                       Wishlist
                     </Link>
 
-                    <div className="vh-dropdown-divider"></div>
-
-                    {/* LOGOUT */}
+                    <div className="dropdown-divider"></div>
 
                     <button
                       type="button"
-                      className="vh-logout"
+                      className="logout"
                       onClick={handleLogout}
                     >
                       Logout
@@ -307,19 +278,15 @@ function Header() {
                   </>
                 ) : (
                   <>
-                    {/* GUEST */}
-
-                    <div className="vh-guest-header">
-                      <strong>
-                        Welcome
-                      </strong>
+                    <div className="guest-header">
+                      <strong>Welcome</strong>
 
                       <span>
                         Login to access your account
                       </span>
                     </div>
 
-                    <div className="vh-dropdown-divider"></div>
+                    <div className="dropdown-divider"></div>
 
                     <Link
                       to="/login"
@@ -345,7 +312,7 @@ function Header() {
 
           <button
             type="button"
-            className="vh-icon-btn vh-toggle"
+            className="icon-button menu-toggle"
             aria-label={
               menuOpen
                 ? "Close menu"
