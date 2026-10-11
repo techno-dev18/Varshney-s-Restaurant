@@ -1,4 +1,8 @@
+const dns = require("node:dns");
 const mongoose = require("mongoose");
+
+// Configure DNS for MongoDB Atlas SRV lookups
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const connectDB = async () => {
   try {
@@ -6,13 +10,14 @@ const connectDB = async () => {
       throw new Error("MONGO_URI is not defined in .env file");
     }
 
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 15000,
+    });
 
     console.log("MongoDB Connected Successfully");
   } catch (error) {
-    console.log("MongoDB Connection Error:");
-    console.log(error.message);
-    process.exit(1);
+    console.error("MongoDB Connection Error:", error.message);
+    throw error;
   }
 };
 

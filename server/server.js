@@ -14,7 +14,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
-
+const BookingLock = require("./models/BookingLock");
 // DNS
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
@@ -23,8 +23,6 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/foods", foodRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/foods", foodRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -38,13 +36,20 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Start server
-const startServer = async () => {
-  await connectDB();
 
-  app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-  });
+const startServer = async () => {
+  try {
+    await connectDB();
+    await BookingLock.init();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error.message);
+    process.exit(1);
+  }
 };
 
 startServer();
+

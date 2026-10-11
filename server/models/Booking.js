@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema(
@@ -16,10 +17,7 @@ const bookingSchema = new mongoose.Schema(
 
     bookingType: {
       type: String,
-      enum: [
-        "room",
-        "hall",
-      ],
+      enum: ["room", "hall"],
       required: true,
     },
 
@@ -47,6 +45,7 @@ const bookingSchema = new mongoose.Schema(
     specialRequest: {
       type: String,
       default: "",
+      maxlength: 1000,
     },
 
     totalAmount: {
@@ -57,22 +56,13 @@ const bookingSchema = new mongoose.Schema(
 
     bookingStatus: {
       type: String,
-      enum: [
-        "pending",
-        "confirmed",
-        "completed",
-        "cancelled",
-      ],
+      enum: ["pending", "confirmed", "completed", "cancelled"],
       default: "pending",
     },
 
     paymentStatus: {
       type: String,
-      enum: [
-        "pending",
-        "paid",
-        "failed",
-      ],
+      enum: ["pending", "paid", "failed"],
       default: "pending",
     },
   },
@@ -81,7 +71,12 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model(
-  "Booking",
-  bookingSchema
-);
+// Helps queries that check room availability for a date and status.
+// This index does not replace the booking-lock transaction.
+bookingSchema.index({
+  room: 1,
+  date: 1,
+  bookingStatus: 1,
+});
+
+module.exports = mongoose.model("Booking", bookingSchema);
