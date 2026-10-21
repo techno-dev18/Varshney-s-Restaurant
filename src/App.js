@@ -1,4 +1,3 @@
-
 import "./Css/Home.css";
 import "./Css/Theme.css";
 import "./Css/AboutUs.css";
@@ -37,12 +36,12 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-<Route path="/orders" element={<MyOrders />} />
-          <Route path="/foodmenu" element={<FoodMenu />} />
+          <Route path="/orders" element={<MyOrders />} />
+          <Route path="/food-menu" element={<FoodMenu />} />
           <Route path="/food/:id" element={<FoodDetails />} />
-<Route path="/checkout" element={<Checkout />} />
-<Route path="/bookings/:id" element={<BookingDetails />} />
-<Route path="/bookings" element={<MyBookings />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/bookings/:id" element={<BookingDetails />} />
+          <Route path="/bookings" element={<MyBookings />} />
           <Route path="/rooms" element={<RoomHall />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
