@@ -6,7 +6,7 @@ import { FaArrowLeft, FaMinus, FaPlus, FaShoppingCart, FaStar } from "react-icon
 import { useCart } from "../components/CartContext";
 import "../Css/FoodDetails.css";
 
-const API_URL = "http://localhost:5000/api/foods";
+const API_URL = "https://varshneys-restaurant-api.onrender.com/api/foods";
 
 function FoodDetails() {
   const { id } = useParams();

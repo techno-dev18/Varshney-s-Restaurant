@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "../Css/RoomHall.css";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://varshneys-restaurant-api.onrender.com/api";
 
 function getToday() {
   // Use the Indian calendar date for booking validation.

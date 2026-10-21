@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Css/MyBookings.css";
 
-const API_URL = "http://localhost:5000/api/bookings";
+const API_URL = "https://varshneys-restaurant-api.onrender.com/api/bookings";
 
 const formatPrice = (amount) =>
 `₹${Number(amount || 0).toLocaleString("en-IN")}`;

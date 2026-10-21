@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Css/MyOrders.css";
 
-const API_URL = "http://localhost:5000/api/orders";
+const API_URL = "https://varshneys-restaurant-api.onrender.com/api/orders";
 
 function formatPrice(amount) {
   return new Intl.NumberFormat("en-IN", {
