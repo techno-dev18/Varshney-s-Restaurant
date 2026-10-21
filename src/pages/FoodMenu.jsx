@@ -24,7 +24,7 @@ function FoodMenu() {
     const fetchFoods = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/foods"
+          "https://varshneys-restaurant-api.onrender.com/api/foods"
         );
 
         if (!response.ok) {
